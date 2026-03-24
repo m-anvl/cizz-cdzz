@@ -1,0 +1,137 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 30,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "base-compiler-gcc",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "base-compiler-clang",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "base-buildtype-release",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "base-buildtype-relwithdebinfo",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "base-linux",
+      "hidden": true,
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "base-macos",
+      "hidden": true,
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Darwin"
+      }
+    },
+    {
+      "name": "base-win",
+      "hidden": true,
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "base-linux-make",
+      "hidden": true,
+      "inherits": "base-linux",
+      "generator": "Unix Makefiles"
+    },
+    {
+      "name": "base-macos-make",
+      "hidden": true,
+      "inherits": "base-macos",
+      "generator": "Unix Makefiles"
+    },
+    {
+      "name": "linux-gcc-release-make",
+      "displayName": "Linux GCC Release (Make)",
+      "inherits": [
+        "base-linux-make",
+        "base-compiler-gcc",
+        "base-buildtype-release"
+      ]
+    },
+    {
+      "name": "macos-clang-relwithdebinfo-make-arm64",
+      "displayName": "macOS Clang RelWithDebInfo (Make, arm64)",
+      "inherits": [
+        "base-macos-make",
+        "base-compiler-clang",
+        "base-buildtype-relwithdebinfo"
+      ],
+      "cacheVariables": {
+        "CMAKE_OSX_ARCHITECTURES": "arm64"
+      }
+    },
+    {
+      "name": "win-relwithdebinfo",
+      "displayName": "Windows RelWithDebInfo (auto-detected compiler and generator)",
+      "inherits": [
+        "base-win",
+        "base-buildtype-relwithdebinfo"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-gcc-release-make",
+      "configurePreset": "linux-gcc-release-make",
+      "jobs": 0
+    },
+    {
+      "name": "macos-clang-relwithdebinfo-make-arm64",
+      "configurePreset": "macos-clang-relwithdebinfo-make-arm64",
+      "jobs": 0
+    },
+    {
+      "name": "win-relwithdebinfo",
+      "configurePreset": "win-relwithdebinfo",
+      "configuration": "RelWithDebInfo",
+      "jobs": 0
+    }
+  ]
+}

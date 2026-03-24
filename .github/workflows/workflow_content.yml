@@ -1,0 +1,27 @@
+name: Project Build Content
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: run content
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: update-workspace
+      run: |
+        sudo apt -qq update
+        sudo apt install --yes cmake build-essential libgl1-mesa-dev libssl-dev unzip
+    - name: build-project
+      run: |
+        git clone https://github.com/jeremy-rifkin/cpptrace.git etc/cpptrace
+        mkdir build
+        mkdir build/data
+        mkdir artifacts
+        cd build
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+        cd ..
+        cmake --build ./build

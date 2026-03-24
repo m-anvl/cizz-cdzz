@@ -1,0 +1,16 @@
+# IDE data
+.kdev4
+*.kdev4
+.vs
+.vscode
+.idea
+/CMakeSettings.json
+CMakeUserPresets.json
+
+# Build output and data directories
+/build*/
+out/
+cmake-build-*
+
+/bin_x64
+

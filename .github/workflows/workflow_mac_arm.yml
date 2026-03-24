@@ -1,0 +1,33 @@
+name: Project Build Mac
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: run on mac arm64
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Install OpenSSL (for curl)
+      run: brew install openssl@3
+    - name: update-workspace
+      run: |
+        export CXXFLAGS=-stdlib=libc++
+        export OPENSSL_ROOT_DIR=$(brew --prefix openssl@3)
+        cmake --preset macos-clang-relwithdebinfo-make-arm64 \
+          -DCMAKE_OSX_DEPLOYMENT_TARGET=11.7 \
+          -DCMAKE_INSTALL_PREFIX="$PWD/build/install"
+
+    - name: build
+      run: |
+        cmake --build --preset macos-clang-relwithdebinfo-make-arm64 -- -j$(sysctl -n hw.ncpu)
+
+    - name: install-and-bundle
+      run: |
+        cmake --build --preset macos-clang-relwithdebinfo-make-arm64 --target install/local
+        mkdir macos_build
+        cp -R ./build/install/cizzcdzz.app ./macos_build/cizzcdzz.app

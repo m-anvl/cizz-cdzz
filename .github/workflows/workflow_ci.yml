@@ -1,0 +1,33 @@
+name: Main CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  clang-format:
+    uses: ./.github/workflows/workflow_clang_format.yml
+    with:
+      base_branch: ${{ github.event.pull_request.base.ref || 'master' }}
+      pull_request_number: ${{ github.event.pull_request.number || '' }}
+    secrets: inherit
+
+#  content:
+#    needs: clang-format
+#    if: github.event_name == 'push'
+#    uses: ./.github/workflows/workflow_content.yml
+#    secrets: inherit
+
+  build-linux:
+    needs: clang-format
+    uses: ./.github/workflows/workflow_linux.yml
+
+  build-mac_arm:
+    needs: clang-format
+    uses: ./.github/workflows/workflow_mac_arm.yml
+
+  build-windows:
+    needs: clang-format
+    uses: ./.github/workflows/workflow_windows.yml
