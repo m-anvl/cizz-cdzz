@@ -25,9 +25,3 @@ jobs:
     - name: build
       run: |
         cmake --build --preset macos-clang-relwithdebinfo-make-arm64 -- -j$(sysctl -n hw.ncpu)
-
-    - name: install-and-bundle
-      run: |
-        cmake --build --preset macos-clang-relwithdebinfo-make-arm64 --target install/local
-        mkdir macos_build
-        cp -R ./build/install/cizzcdzz.app ./macos_build/cizzcdzz.app

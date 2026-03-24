@@ -20,18 +20,4 @@ jobs:
     - name: build-project
       run: |
         cmake --preset win-relwithdebinfo
-        cmake --build --preset win-relwithdebinfo --target akhenaten -j $env:NUMBER_OF_PROCESSORS
-        copy ./build/RelWithDebInfo/akhenaten.exe ./bin_x64/akhenaten.exe
-        copy ./build/RelWithDebInfo/akhenaten.pdb ./bin_x64/akhenaten.pdb
-        copy ./data/pharaoh_fonts_pack.sgx ./bin_x64/data/pharaoh_fonts_pack.sgx
-        copy ./data/pharaoh_custom_pack.sgx ./bin_x64/data/pharaoh_custom_pack.sgx
-        copy ./data/pharaoh_houses_pack.sgx ./bin_x64/data/pharaoh_houses_pack.sgx
-        copy ./data/neucha.ttf ./bin_x64/data/neucha.ttf
-    - name: create-package
-      shell: pwsh
-      run: |
-        Compress-Archive -Path bin_x64/* -Destination windows_build.zip
-    - uses: actions/upload-artifact@v4
-      with:
-        name: windows_build
-        path: bin_x64
+        cmake --build --preset win-relwithdebinfo --target cizzcdzz -j $env:NUMBER_OF_PROCESSORS
