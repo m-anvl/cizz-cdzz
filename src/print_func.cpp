@@ -1,7 +1,8 @@
 #include "print_func.h"
 #include <cstdio>
 
-#define FOOO   0
+#define FOOO    10
+#define   FOiOO      110
 #define      BARRR   7
 #define    FOOBAR  4     
 
