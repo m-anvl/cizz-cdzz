@@ -13,3 +13,7 @@ printf("%s\n", str_ptr);
             return      ;      
 }
 
+
+static void print_bar() {
+    puts("bar");
+}
