@@ -11,9 +11,11 @@ static void print_foo() {
 
 
 void print_string(const char* str_ptr){
+
 printf("%s", str_ptr);  
 puts( "");
 printf("\n" )  ;   
                 return      ;      
+
 }
 

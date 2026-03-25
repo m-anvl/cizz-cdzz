@@ -13,7 +13,7 @@ int main() {
             std::cout << "Buzz\n";
         } 
         else {
-            std::cout << i << "\n";
+                 std::cout <<     i << "\n"     ;
         }
     }
     std::cout << std::endl;
