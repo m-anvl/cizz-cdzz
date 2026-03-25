@@ -47,16 +47,17 @@ jobs:
               compare_with="HEAD^1"
             fi
           fi
-          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp || true)
+          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp)
+          exit_code=$?
           echo "clang-format output:"
           echo "$output"
-          if [ "$output" != "no modified files to format" ]; then
-            echo "diff<<EOF" >> $GITHUB_OUTPUT
-            echo "$output" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-            exit 1
+          if [ $exit_code -eq 0 ]; then
+              echo "clang-format passed."
           else
-            echo "clang-format passed."
+              echo "diff<<EOF" >> $GITHUB_OUTPUT
+              echo "$output" >> $GITHUB_OUTPUT
+              echo "EOF" >> $GITHUB_OUTPUT
+              exit 1
           fi
     - name: post-comment-on-pull-request
       if: failure() && inputs.pull_request_number != ''
