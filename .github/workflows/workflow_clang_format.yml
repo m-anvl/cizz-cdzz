@@ -47,7 +47,7 @@ jobs:
               compare_with="HEAD^1"
             fi
           fi
-          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp)
+          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp || true)
           echo "clang-format output:"
           echo "$output"
           if [ "$output" != "no modified files to format" ]; then
