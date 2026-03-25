@@ -16,3 +16,7 @@ puts( "");
                 return      ;      
 }
 
+
+static void print_bar() {
+    puts("bar");
+}
