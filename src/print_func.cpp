@@ -5,6 +5,7 @@
 #define   FOiOO      110
 #define      BARRR   7
 #define    FOOBAR  4     
+#define        FOOBtR     4 
 
 
 void print_string(const char* str_ptr){
