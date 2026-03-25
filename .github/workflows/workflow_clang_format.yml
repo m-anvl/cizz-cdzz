@@ -9,6 +9,12 @@ on:
       pull_request_number:
         required: false
         type: string
+      event_name:
+        required: true
+        type: string
+      event_before:
+        required: false
+        type: string
     secrets:
       COMMENT_TOKEN:
         required: false
@@ -31,8 +37,17 @@ jobs:
     - name: check-format
       id: check-formatting
       run: |
-          git fetch origin ${{ inputs.base_branch }}
-          output=$(git clang-format --diff origin/${{ inputs.base_branch }} --extensions cpp,cc,cxx,h,hpp)
+          if [ "${{ inputs.event_name }}" = "pull_request" ]; then
+            git fetch origin ${{ inputs.base_branch }}
+            compare_with="origin/${{ inputs.base_branch }}"
+          else
+            if [ -n "${{ inputs.event_before }}" ] && git rev-parse --verify --quiet "${{ inputs.event_before }}" >/dev/null; then
+              compare_with="${{ inputs.event_before }}"
+            else            
+              compare_with="HEAD^1"
+            fi
+          fi
+          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp)
           echo "clang-format output:"
           echo "$output"
           if [ "$output" != "no modified files to format" ]; then
