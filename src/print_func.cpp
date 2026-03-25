@@ -1,16 +1,19 @@
 #include "print_func.h"
 #include <cstdio>
 
-#define FOOO    10
-#define   FOiOO      110
-#define      BARRR   7
-#define    FOOBAR  4     
-#define        FOOBtR     4 
+#define FOOO   0
+#define BARRR  7
+#define FOOBAR 4
+
+static void print_foo() {
+    printf("foo");
+}
 
 
 void print_string(const char* str_ptr){
-printf("%s\n", str_ptr);  
-            return      ;      
+printf("%s", str_ptr);  
+puts( "");
+                return      ;      
 }
 
 
