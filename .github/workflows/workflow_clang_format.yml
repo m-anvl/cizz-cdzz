@@ -57,6 +57,7 @@ jobs:
               echo "diff<<EOF" >> $GITHUB_OUTPUT
               echo "$output" >> $GITHUB_OUTPUT
               echo "EOF" >> $GITHUB_OUTPUT
+              echo "clang-format failed."
               exit 1
           fi
     - name: post-comment-on-pull-request
