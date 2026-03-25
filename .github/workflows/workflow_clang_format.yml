@@ -47,7 +47,10 @@ jobs:
               compare_with="HEAD^1"
             fi
           fi
-          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp 2>&1) || exit_code=$?
+          set +e
+          output=$(git clang-format --diff "$compare_with" --extensions cpp,cc,cxx,h,hpp 2>&1)
+          exit_code=$?
+          set -e
           echo "clang-format output:"
           echo "$output"
           if [ $exit_code -eq 0 ]; then
