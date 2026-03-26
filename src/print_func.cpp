@@ -7,6 +7,7 @@
 
 static void print_foo() {
     printf("foo");
+return    ;
 }
 
 
