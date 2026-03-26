@@ -15,9 +15,6 @@ on:
       event_before:
         required: false
         type: string
-    secrets:
-      GITHUB_TOKEN:
-        required: false
 
 jobs:
   build:
