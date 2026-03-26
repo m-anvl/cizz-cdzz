@@ -3,6 +3,7 @@
 
 
 int main() {
+    std::cout << "\n" << std::endl;
     for (int i = 1; i <= 100; ++i) {
         if (i % 15 == 0){
                       std::cout << "FizzBuzz\n";
@@ -16,6 +17,6 @@ int main() {
                  std::cout <<     i << "\n"     ;
         }
     }
-          std::cout   << "\n" <<   std::endl       ;
+    std::cout << "\n" << std::endl;
     return 0;
 }
