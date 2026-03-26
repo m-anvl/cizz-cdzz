@@ -16,5 +16,6 @@ int main() {
                  std::cout <<     i << "\n"     ;
         }
     }
+          std::cout   << "\n" <<   std::endl       ;
     return 0;
 }
