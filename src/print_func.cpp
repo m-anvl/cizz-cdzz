@@ -7,11 +7,13 @@
 
 static void print_foo() {
     printf("foo");
+return    ;
 }
 
 
 void print_string(const char* str_ptr){
     printf("%s", str_ptr);
+printf("");
     puts("");
     return;
 }
