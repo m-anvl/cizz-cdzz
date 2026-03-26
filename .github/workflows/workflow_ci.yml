@@ -3,8 +3,12 @@ name: Main CI
 on:
   push:
     branches: [ "master" ]
-  pull_request:
+  pull_request_target:
     branches: [ "master" ]
+
+permissions:
+  pull-requests: write
+  contents: read
 
 jobs:
   clang-format:
