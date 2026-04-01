@@ -29,12 +29,15 @@ jobs:
 
   build-linux:
     needs: clang-format
+    if: github.event_name == 'push' || needs.clang-format.result == 'success'
     uses: ./.github/workflows/workflow_linux.yml
 
   build-mac_arm:
     needs: clang-format
+    if: github.event_name == 'push' || needs.clang-format.result == 'success'
     uses: ./.github/workflows/workflow_mac_arm.yml
 
   build-windows:
     needs: clang-format
+    if: github.event_name == 'push' || needs.clang-format.result == 'success'
     uses: ./.github/workflows/workflow_windows.yml
