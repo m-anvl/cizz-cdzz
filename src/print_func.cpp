@@ -6,6 +6,7 @@
 #define FOOBAR 4
 
 static void print_foo() {
+puts("")      ;
     printf("foo");
 }
 
